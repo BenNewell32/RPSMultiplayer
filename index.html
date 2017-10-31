@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>RPSMultiplayer</title>
+	<script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+</head>
+<body>
+	<div class = "container">
+		<div class = "jumbotron">
+			<h2 class="titlecharacter"><div style="color: white; font-size: 30px"></div>
+				<a href="signin.html" class="btn btn-danger">
+				choose YOUR character
+				</a>
+			</h2>
+			<h1 style="font-weight: bolder">ROCK-PAPER
+			<br>SMASHbrothers
+			</h1>
+			<h3>Smash your way to the top!
+			</h3>
+		</div>
+		<div class= col-md-5>
+			<div class="panel panel-default">
+	  			<div id= "player1" class="panel-heading">
+		  			Player 1
+					<br>
+					<button id="plyr1btn" class="btn btn-danger">
+		  				Click to join game!
+		  			</button>
+		  			<div id="plyr1score">
+		  			</div>
+		  			<div id="plyr1RPS">
+		  			</div>
+	  			</div>
+			</div>
+
+		</div>
+		<div id="vs" class= col-md-2>
+			<div class=row>V.S.
+			</div>
+			<div style="font-size: 20px" id="cs" class=row>
+			</div>
+		</div>
+		<div class= col-md-5>
+			<div class="panel panel-default">
+	  			<div id= "player2" class="panel-heading">
+					Player 2
+					<br>
+		  			<button id="plyr2btn" class="btn btn-danger">
+		  			Click to join game!
+		  			</button>
+		  			<div id="plyr2score">
+		  			</div>
+		  			<div id="plyr2RPS">
+		  			</div>
+	  			</div>
+			</div>
+		</div>
+		<div>
+
+		<div class="panel panel-default">
+  			<div class="panel-body">
+  				<table class="table table-striped">
+					<thead>
+					   	<tr>
+						    <th class="data-header" id="usercom" >User</th>
+						    <th class="data-header" id="comtime">time</th>
+						    <th class="data-header" id="comdet">Comment</th>
+					    </tr>
+					</thead>
+
+					<tbody class = "comment-data-table"></tbody>
+				</table>
+				<input style="width: 75%" type="text" id="commdet">
+				<input id="entercom" class="btn btn-danger" value="Send Comment">
+  			</div>
+		</div>
+		</div>
+	</div>
+
+<script type="text/javascript" src="assets/js/game.js"></script>	
+</body>
+</html>
+

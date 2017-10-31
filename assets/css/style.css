@@ -1,0 +1,52 @@
+h2{
+	/*color: white;*/
+	text-align :center;
+	font-size: 50px;
+}
+h3{
+	/*color: white;*/
+	font-weight: bolder;
+	text-align :center;
+}
+
+.jumbotron h1{
+/*	color: #fca206;
+*/	text-align: center;
+	
+}
+
+.jumbotron{
+	background-image: url('../images/ssb2.jpg')
+}
+
+.panel-heading{
+	background-color: #004089 !important;
+	color: white !important;
+	font-weight: bold !important;
+	text-align: center;
+}
+
+/*.btn-primary{
+	background-color: #004089 !important;
+	color: white !important;
+}*/
+
+.btn:hover{
+	background-color: #4caf50;
+	}
+
+
+#player2{
+	background-color: #4caf50;
+}
+
+#vs{
+	font-size: 50px;
+	font-weight: bolder;
+	text-align: center;
+}
+
+.iconimg{
+	width: 60px;
+	height: 30px;
+}
