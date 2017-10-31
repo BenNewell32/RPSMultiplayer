@@ -30,7 +30,7 @@
     localStorage.setItem("allLosses",0);
       console.log(localStorage.getItem("allLosses"));
     
-    window.open("index.html");
+    window.open("http://htmlpreview.github.io/?https://github.com/BenNewell32/RPSMultiplayer/blob/master/index.html");
   });
 
   //If user has selected character, add to title
