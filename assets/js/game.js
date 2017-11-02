@@ -260,7 +260,219 @@
 
         var p1score=0;
         var p2score=0;
-  $(document).on("click", ".iconimg", function(){
+////////////
+//CHANNGING CODE TO READ OFF FIRBASE CHANGES FOR EACH PLAYER
+//PLAYER 1//
+////////////
+        var s1Ref= database.ref("score1");
+  s1Ref.on('value', function(snapshot){
+  
+        console.log(plyr1guess);
+        console.log(plyr1status);
+        console.log(plyr2guess);
+        console.log(plyr2status);
+
+          if (plyr1status==1 && plyr1status==1){
+
+            if (plyr1guess==plyr2guess){
+                  console.log("push");
+                  var csDiv= $("<div>")
+                  csDiv.text("PUSH"); 
+                  $("#cs").html(csDiv);
+                  database.ref("score1").set({
+                    plyr1currentguess: "",
+                    waiting1:0
+                    });
+                  database.ref("score2").set({
+                    plyr2currentguess: "",
+                    waiting2:0
+                    });
+                }
+            if (plyr1guess=='rock' && plyr2guess=='paper'){
+                  console.log("player 2 wins");
+                  var csDiv= $("<div>")
+                  csDiv.text("P2 wins!"); 
+                  $("#cs").html(csDiv);
+                  p2score++;
+                  console.log(p1score);
+                  console.log(p2score);
+                  database.ref("score1").set({
+                    plyr1currentguess: "",
+                    waiting1:0
+                  });
+                  database.ref("score2").set({
+                    plyr2currentguess: "",
+                    waiting2:0
+                  });
+                  
+                  database.ref("wins2").set({
+                    secondplr: p2score,
+                    waiting2:0
+                  });
+                  database.ref("wins1").set({
+                    firstplr: p1score,
+                    waiting2:0
+                  });
+            }
+            if (plyr1guess=='rock' && plyr2guess=='scissors'){
+                  console.log("player 1 wins");
+                  var csDiv= $("<div>")
+                  csDiv.text("P1 wins!"); 
+                  $("#cs").html(csDiv);
+                  p1score++;
+                  console.log(p1score);
+                  console.log(p2score);
+                  database.ref("score1").set({
+                    plyr1currentguess: "",
+                    waiting1:0
+                    });
+                  database.ref("score2").set({
+                    plyr2currentguess: "",
+                    waiting2:0
+                    });
+
+                  database.ref("wins2").set({
+                    secondplr: p2score,
+                    waiting2:0
+                  });
+                  database.ref("wins1").set({
+                    firstplr: p1score,
+                    waiting2:0
+                  });
+            }
+            if (plyr1guess=='paper' && plyr2guess=='rock'){
+                  console.log("player 1 wins");
+                  var csDiv= $("<div>")
+                  csDiv.text("P1 wins!"); 
+                  $("#cs").html(csDiv);
+                  p1score++;
+                  console.log(p1score);
+                  console.log(p2score);
+                  database.ref("score1").set({
+                    plyr1currentguess: "",
+                    waiting1:0
+                    });
+                  database.ref("score2").set({
+                    plyr2currentguess: "",
+                    waiting2:0
+                    });
+
+                  database.ref("wins2").set({
+                    secondplr: p2score,
+                    waiting2:0
+                  });
+                  database.ref("wins1").set({
+                    firstplr: p1score,
+                    waiting2:0
+                  });
+            }
+            if (plyr1guess=='paper' && plyr2guess=='scissors'){
+                  console.log("player 2 wins");
+                  var csDiv= $("<div>")
+                  csDiv.text("P2 wins!"); 
+                  $("#cs").html(csDiv);
+                  p2score++;
+                  console.log(p1score);
+                  console.log(p2score);
+                  database.ref("score1").set({
+                    plyr1currentguess: "",
+                    waiting1:0
+                    });
+                  database.ref("score2").set({
+                    plyr2currentguess: "",
+                    waiting2:0
+                    });
+
+                  database.ref("wins2").set({
+                    secondplr: p2score,
+                    waiting2:0
+                  });
+                  database.ref("wins1").set({
+                    firstplr: p1score,
+                    waiting2:0
+                  });
+            }
+            if (plyr1guess=='scissors' && plyr2guess=='rock'){
+                  console.log("player 2 wins");
+                  var csDiv= $("<div>")
+                  csDiv.text("P2 wins!"); 
+                  $("#cs").html(csDiv);
+                  p2score++;
+                  console.log(p1score);
+                  console.log(p2score);
+                  database.ref("score1").set({
+                    plyr1currentguess: "",
+                    waiting1:0
+                    });
+                  database.ref("score2").set({
+                    plyr2currentguess: "",
+                    waiting2:0
+                    });
+
+                  database.ref("wins2").set({
+                    secondplr: p2score,
+                    waiting2:0
+                  });
+                  database.ref("wins1").set({
+                    firstplr: p1score,
+                    waiting2:0
+                  });
+            }
+            if (plyr1guess=='scissors' && plyr2guess=='paper'){
+                  console.log("player 1 wins");
+                  var csDiv= $("<div>")
+                  csDiv.text("P1 wins!"); 
+                  $("#cs").html(csDiv);
+                  p1score++;
+                  console.log(p1score);
+                  console.log(p2score);
+                  database.ref("score1").set({
+                    plyr1currentguess: "",
+                    waiting1:0
+                    });
+                  database.ref("score2").set({
+                    plyr2currentguess: "",
+                    waiting2:0
+                    });
+
+                  database.ref("wins2").set({
+                    secondplr: p2score,
+                    waiting2:0
+                  });
+                  database.ref("wins1").set({
+                    firstplr: p1score,
+                    waiting2:0
+                  });
+            }
+          }
+          else{
+            console.log("waiting for selections");
+          }
+          if (p1score==3) {
+                  var csDiv= $("<div>")
+                  csDiv.text("Game P1"); 
+                  $("#cs").html(csDiv);
+                  p1score=0;
+                  p2score=0;
+
+          }
+          if (p2score==3){
+                  var csDiv= $("<div>")
+                  csDiv.text("Game P2"); 
+                  $("#cs").html(csDiv);
+                  p1score=0;
+                  p2score=0;
+
+          }
+      });
+
+////////////
+//CHANNGING CODE TO READ OFF FIRBASE CHANGES FOR EACH PLAYER
+//PLAYER 2//
+////////////
+        var s2Ref= database.ref("score2");
+  s2Ref.on('value', function(snapshot){
+  
         console.log(plyr1guess);
         console.log(plyr1status);
         console.log(plyr2guess);
