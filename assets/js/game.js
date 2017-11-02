@@ -33,14 +33,13 @@
     window.open("http://htmlpreview.github.io/?https://github.com/BenNewell32/RPSMultiplayer/blob/master/index.html");
   });
 
+
   //If user has selected character, add to title
   if(localStorage.getItem("Character") !== null && localStorage.getItem("Character") !== '') {
     var characterDiv= $("<div>")
     characterDiv.text("Welcome " + localStorage.getItem("Character")); 
     $(".titlecharacter").html(characterDiv);
   }
-
-
 
 
 //////////////////////////
@@ -59,22 +58,26 @@
         currentloss1: 0,
         currentwins1: 0,
       });
-    }
+    };
+  });
+
 
     //create player1 div
-    if(localStorage.getItem("Character") !== null && localStorage.getItem("Character") !== '') {
-      var char1Ref= database.ref("plyr1");
-      // console.log(char1Ref);
-      var char1div= $("<div>");
-      
-      char1Ref.on("value", function(snapshot){
-        snapshot.forEach(function(childSnapshot) {
+    var char1Ref= database.ref("plyr1");
+    char1Ref.on("value", function(snapshot){
+      snapshot.forEach(function(childSnapshot) {
 
-      var p1name=childSnapshot.val();
-      $(char1div).text(p1name);
-      $("#plyr1btn").html(char1div);
+        if(localStorage.getItem("Character") !== null && localStorage.getItem("Character") !== '') {
+          
+          // console.log(char1Ref);
+          var char1div= $("<div>");
+
+          var p1name=childSnapshot.val();
+          $(char1div).text(p1name);
+          $("#plyr1btn").html(char1div);
+        };
       });
-    });
+    
 
       var plyr1wins = localStorage.getItem("allWins");
       var plyr1losses = localStorage.getItem("allLosses");
@@ -121,8 +124,8 @@
       rpsDiv.append(opbuttonS);
       $("#plyr1RPS").html(rpsDiv);
 
-    }
-  });
+    });
+
 
 
 //////////////////////////
@@ -141,22 +144,26 @@
         currentloss2: 0,
         currentwins2: 0,
       });
-    }
+    };
+  });
+
 
     //create player2 div
-    if(localStorage.getItem("Character") !== null && localStorage.getItem("Character") !== '') {
-      var char2Ref= database.ref("plyr2");
-      // console.log(char2Ref);
-      var char2div= $("<div>");
-      
-      char2Ref.on("value", function(snapshot){
-        snapshot.forEach(function(childSnapshot) {
+    var char2Ref= database.ref("plyr2");
+    char2Ref.on("value", function(snapshot){
+      snapshot.forEach(function(childSnapshot) {
 
-      var p2name=childSnapshot.val();
-      $(char2div).text(p2name);
-      $("#plyr2btn").html(char2div);
+        if(localStorage.getItem("Character") !== null && localStorage.getItem("Character") !== '') {
+          
+          // console.log(char2Ref);
+          var char2div= $("<div>");
+
+          var p2name=childSnapshot.val();
+          $(char2div).text(p2name);
+          $("#plyr2btn").html(char2div);
+        };
       });
-    });
+    
 
       var plyr2wins = localStorage.getItem("allWins");
       var plyr2losses = localStorage.getItem("allLosses");
@@ -169,27 +176,27 @@
 
       //add RPS icons
       var rpsDiv = $("<div>");
-
+      
       var opbuttonR = $("<button>");
-      opbuttonR.attr("class","btn btn-secondary")
+      opbuttonR.attr("class","btn btn-secondary");
       var iconDivR = $("<img>");
-      iconDivR.attr("data-value","rock");
-      iconDivR.attr("src","assets/images/rright.png");
+      iconDivR.attr("src","assets/images/rleft.png");
       iconDivR.attr("id","rock2");
       iconDivR.attr("class","iconimg");
-      var opbuttonP = $("<button>");
-      opbuttonP.attr("class","btn btn-secondary")
+      iconDivR.attr("data-value","rock");
 
+      var opbuttonP = $("<button>");
+      opbuttonP.attr("class","btn btn-secondary");
       var iconDivP = $("<img>");
-      iconDivP.attr("data-value","paper");
-      iconDivP.attr("src","assets/images/pright.png");
+      iconDivP.attr("src","assets/images/pleft.png");
       iconDivP.attr("id","paper2");
       iconDivP.attr("class","iconimg");
+      iconDivP.attr("data-value","paper");
+      
       var opbuttonS = $("<button>");
-      opbuttonS.attr("class","btn btn-secondary")
-
+      opbuttonS.attr("class","btn btn-secondary");
       var iconDivS = $("<img>");
-      iconDivS.attr("src","assets/images/sright.png");
+      iconDivS.attr("src","assets/images/sleft.png");
       iconDivS.attr("id","scissors2");
       iconDivS.attr("class","iconimg");
       iconDivS.attr("data-value","scissors");
@@ -203,8 +210,7 @@
       rpsDiv.append(opbuttonS);
       $("#plyr2RPS").html(rpsDiv);
 
-    }
-  });
+    });
 
 
 /////////////////
@@ -260,10 +266,10 @@
 
         var p1score=0;
         var p2score=0;
-////////////
-//CHANNGING CODE TO READ OFF FIRBASE CHANGES FOR EACH PLAYER
-//PLAYER 1//
-////////////
+  ////////////
+  //CHANNGING CODE TO READ OFF FIRBASE CHANGES FOR EACH PLAYER
+  //PLAYER 1//
+  ////////////
         var s1Ref= database.ref("score1");
   s1Ref.on('value', function(snapshot){
   
@@ -466,10 +472,10 @@
           }
       });
 
-////////////
-//CHANNGING CODE TO READ OFF FIRBASE CHANGES FOR EACH PLAYER
-//PLAYER 2//
-////////////
+  ////////////
+  //CHANNGING CODE TO READ OFF FIRBASE CHANGES FOR EACH PLAYER
+  //PLAYER 2//
+  ////////////
         var s2Ref= database.ref("score2");
   s2Ref.on('value', function(snapshot){
   
