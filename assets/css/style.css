@@ -35,6 +35,10 @@ h3{
 	background-color: #4caf50;
 	}
 
+.disabled:hover{
+	background-color: #ef7268;
+	}
+
 
 #player2{
 	background-color: #4caf50;

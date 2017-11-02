@@ -63,7 +63,7 @@
 		<div>
 
 		<div class="panel panel-default">
-  			<div class="panel-body">
+  			<div style="overflow-y:scroll"  style="height: 200px" class="panel-body">
   				<table class="table table-striped">
 					<thead>
 					   	<tr>
@@ -73,12 +73,13 @@
 					    </tr>
 					</thead>
 
-					<tbody class = "comment-data-table"></tbody>
+					<tbody style="overflow-y:scroll" style="height: 200px" class = "comment-data-table"></tbody>
 				</table>
-				<input style="width: 75%" type="text" id="commdet">
+				<input class="comments" style="width: 75%" type="text" id="commdet">
 				<input id="entercom" class="btn btn-danger" value="Send Comment">
   			</div>
 		</div>
+		<input id="clearcom" style="width: 100%" class="btn basic disabled" value="clear comments">
 		</div>
 	</div>
 

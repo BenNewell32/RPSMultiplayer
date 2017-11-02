@@ -41,6 +41,8 @@
   }
 
 
+
+
 //////////////////////////
 // IF PLAYER 1 IS SELECTED
 //////////////////////////
@@ -49,7 +51,7 @@
     //firbase variables for Player 1
     if(localStorage.getItem("Character") !== null && localStorage.getItem("Character") !== '') {
       plyr1Ref= database.ref("plyr1");
-      console.log(plyr1Ref);
+      // console.log(plyr1Ref);
       database.ref("plyr1").set({
         plyrname: localStorage.getItem("Character"),
         alltimelosses1: parseInt(localStorage.getItem("allLosses")),
@@ -61,9 +63,18 @@
 
     //create player1 div
     if(localStorage.getItem("Character") !== null && localStorage.getItem("Character") !== '') {
-      var plyr1Div= $("<div>")
-      var plyr1Name = localStorage.getItem("Character");
-      console.log(plyr1Name);
+      var char1Ref= database.ref("plyr1");
+      // console.log(char1Ref);
+      var char1div= $("<div>");
+      
+      char1Ref.on("value", function(snapshot){
+        snapshot.forEach(function(childSnapshot) {
+
+      var p1name=childSnapshot.val();
+      $(char1div).text(p1name);
+      $("#plyr1btn").html(char1div);
+      });
+    });
 
       var plyr1wins = localStorage.getItem("allWins");
       var plyr1losses = localStorage.getItem("allLosses");
@@ -71,11 +82,8 @@
       
       var scoreDiv = $("<div>")
       scoreDiv.text("Wins: "+ plyr1wins +" , Losses: " + plyr1losses)
-      
-      $("#plyr1btn").html(plyr1Name);
-      
-      plyr1Div.append(scoreDiv);
-      $("#plyr1score").html(plyr1Div);
+
+      $("#plyr1btn").append(scoreDiv);
 
       //add RPS icons
       var rpsDiv = $("<div>");
@@ -124,31 +132,40 @@
 
     //firbase variables for Player 2
     if(localStorage.getItem("Character") !== null && localStorage.getItem("Character") !== '') {
-      // plyr1Ref= database.ref("plyr1")
-      // console.log(plyr1Ref);
-      // namePlyr2;
-      // currentwin2;
-      // currentloss2;
-      // alltimewins2;
-      //alltimelossses2;
+      plyr2Ref= database.ref("plyr2");
+      // console.log(plyr2Ref);
+      database.ref("plyr2").set({
+        plyrname: localStorage.getItem("Character"),
+        alltimelosses2: parseInt(localStorage.getItem("allLosses")),
+        alltimewins2: parseInt(localStorage.getItem("allWins")),
+        currentloss2: 0,
+        currentwins2: 0,
+      });
     }
 
     //create player2 div
     if(localStorage.getItem("Character") !== null && localStorage.getItem("Character") !== '') {
-      var plyr2Div= $("<div>")
-      var plyr2Name = localStorage.getItem("Character");
+      var char2Ref= database.ref("plyr2");
+      // console.log(char2Ref);
+      var char2div= $("<div>");
+      
+      char2Ref.on("value", function(snapshot){
+        snapshot.forEach(function(childSnapshot) {
+
+      var p2name=childSnapshot.val();
+      $(char2div).text(p2name);
+      $("#plyr2btn").html(char2div);
+      });
+    });
+
       var plyr2wins = localStorage.getItem("allWins");
       var plyr2losses = localStorage.getItem("allLosses");
-      console.log(plyr2Name);
-     
+      
       
       var scoreDiv = $("<div>")
       scoreDiv.text("Wins: "+ plyr2wins +" , Losses: " + plyr2losses)
-      
-      $("#plyr2btn").html(plyr2Name);
-      
-      plyr2Div.append(scoreDiv);
-      $("#plyr2score").html(plyr2Div);
+
+      $("#plyr2btn").append(scoreDiv);
 
       //add RPS icons
       var rpsDiv = $("<div>");
@@ -241,14 +258,14 @@
     console.log(err);
   };
 
-
+        var p1score=0;
+        var p2score=0;
   $(document).on("click", ".iconimg", function(){
         console.log(plyr1guess);
         console.log(plyr1status);
         console.log(plyr2guess);
         console.log(plyr2status);
-        var p1score=0;
-        var p2score=0;
+
           if (plyr1status==1 && plyr1status==1){
 
             if (plyr1guess==plyr2guess){
@@ -270,7 +287,9 @@
                   var csDiv= $("<div>")
                   csDiv.text("P2 wins!"); 
                   $("#cs").html(csDiv);
-                  //++ to playr 2 score;
+                  p2score++;
+                  console.log(p1score);
+                  console.log(p2score);
                   database.ref("score1").set({
                     plyr1currentguess: "",
                     waiting1:0
@@ -279,16 +298,24 @@
                     plyr2currentguess: "",
                     waiting2:0
                   });
-                  // database.ref("wins").set({
-                  //   2plr: +1
-                  // });
+                  
+                  database.ref("wins2").set({
+                    secondplr: p2score,
+                    waiting2:0
+                  });
+                  database.ref("wins1").set({
+                    firstplr: p1score,
+                    waiting2:0
+                  });
             }
             if (plyr1guess=='rock' && plyr2guess=='scissors'){
                   console.log("player 1 wins");
                   var csDiv= $("<div>")
                   csDiv.text("P1 wins!"); 
                   $("#cs").html(csDiv);
-                  //++ to playr 1 score;
+                  p1score++;
+                  console.log(p1score);
+                  console.log(p2score);
                   database.ref("score1").set({
                     plyr1currentguess: "",
                     waiting1:0
@@ -297,16 +324,24 @@
                     plyr2currentguess: "",
                     waiting2:0
                     });
-                  // database.ref("wins").set({
-                  //   1plr: +1
-                  // });
+
+                  database.ref("wins2").set({
+                    secondplr: p2score,
+                    waiting2:0
+                  });
+                  database.ref("wins1").set({
+                    firstplr: p1score,
+                    waiting2:0
+                  });
             }
             if (plyr1guess=='paper' && plyr2guess=='rock'){
                   console.log("player 1 wins");
                   var csDiv= $("<div>")
                   csDiv.text("P1 wins!"); 
                   $("#cs").html(csDiv);
-                  //++ to playr 1 score;
+                  p1score++;
+                  console.log(p1score);
+                  console.log(p2score);
                   database.ref("score1").set({
                     plyr1currentguess: "",
                     waiting1:0
@@ -315,16 +350,24 @@
                     plyr2currentguess: "",
                     waiting2:0
                     });
-                  // database.ref("wins").set({
-                  //   1plr: +1
-                  // });
+
+                  database.ref("wins2").set({
+                    secondplr: p2score,
+                    waiting2:0
+                  });
+                  database.ref("wins1").set({
+                    firstplr: p1score,
+                    waiting2:0
+                  });
             }
             if (plyr1guess=='paper' && plyr2guess=='scissors'){
                   console.log("player 2 wins");
                   var csDiv= $("<div>")
                   csDiv.text("P2 wins!"); 
                   $("#cs").html(csDiv);
-                  //++ to playr 2 score;
+                  p2score++;
+                  console.log(p1score);
+                  console.log(p2score);
                   database.ref("score1").set({
                     plyr1currentguess: "",
                     waiting1:0
@@ -333,16 +376,24 @@
                     plyr2currentguess: "",
                     waiting2:0
                     });
-                  // database.ref("wins").set({
-                  //   2plr: +1
-                  // });
+
+                  database.ref("wins2").set({
+                    secondplr: p2score,
+                    waiting2:0
+                  });
+                  database.ref("wins1").set({
+                    firstplr: p1score,
+                    waiting2:0
+                  });
             }
             if (plyr1guess=='scissors' && plyr2guess=='rock'){
                   console.log("player 2 wins");
                   var csDiv= $("<div>")
                   csDiv.text("P2 wins!"); 
                   $("#cs").html(csDiv);
-                  //++ to playr 2 score;
+                  p2score++;
+                  console.log(p1score);
+                  console.log(p2score);
                   database.ref("score1").set({
                     plyr1currentguess: "",
                     waiting1:0
@@ -351,16 +402,24 @@
                     plyr2currentguess: "",
                     waiting2:0
                     });
-                  // database.ref("wins").set({
-                  //   2plr: +1
-                  // });
+
+                  database.ref("wins2").set({
+                    secondplr: p2score,
+                    waiting2:0
+                  });
+                  database.ref("wins1").set({
+                    firstplr: p1score,
+                    waiting2:0
+                  });
             }
             if (plyr1guess=='scissors' && plyr2guess=='paper'){
                   console.log("player 1 wins");
                   var csDiv= $("<div>")
                   csDiv.text("P1 wins!"); 
                   $("#cs").html(csDiv);
-                  //++ to playr 1 score;
+                  p1score++;
+                  console.log(p1score);
+                  console.log(p2score);
                   database.ref("score1").set({
                     plyr1currentguess: "",
                     waiting1:0
@@ -369,13 +428,35 @@
                     plyr2currentguess: "",
                     waiting2:0
                     });
-                  // database.ref("wins").set({
-                  //   1plr: +1
-                  // });
+
+                  database.ref("wins2").set({
+                    secondplr: p2score,
+                    waiting2:0
+                  });
+                  database.ref("wins1").set({
+                    firstplr: p1score,
+                    waiting2:0
+                  });
             }
           }
           else{
             console.log("waiting for selections");
+          }
+          if (p1score==3) {
+                  var csDiv= $("<div>")
+                  csDiv.text("Game P1"); 
+                  $("#cs").html(csDiv);
+                  p1score=0;
+                  p2score=0;
+
+          }
+          if (p2score==3){
+                  var csDiv= $("<div>")
+                  csDiv.text("Game P2"); 
+                  $("#cs").html(csDiv);
+                  p1score=0;
+                  p2score=0;
+
           }
       });
 
@@ -420,15 +501,26 @@
     //console.log(newTR);
 
    $(".comment-data-table").prepend(newTR);
-   $("#commdet").empty();
+   $(".comments").val('');
     });
   });
 
+  $(document).on("click", "#clearcom", function(){
+    $(".comments").val('');
+  });
+
+////////
+//TO DOs
+////////
+    // Change Player Name to read value from database
+    // Change win or losses based on value from database
+    // add total win losses to local 
+        // add total win/losses to firebase
+        // add to html
 
 ////////
 //EXTRAS
 ////////
-  //REMOVE COMMENT FROM INPUT BOX
   //SCROLLER ON COMMENT BOX
 
   //SPACE BETWEEN RPS ICONS
@@ -437,3 +529,6 @@
     // var sample = document.getElementById("foobar");
     // sample.play();
     // console.log(document.getElementById("foobar"));
+
+  //if characters are the same.... send to real site for battle
+  //https://emulatoronline.com/n64-games/super-smash-bros/
